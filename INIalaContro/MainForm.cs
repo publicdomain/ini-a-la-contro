@@ -9,7 +9,9 @@ namespace INIalaContro
     using System;
     using System.Collections.Generic;
     using System.Drawing;
+    using System.IO;
     using System.Windows.Forms;
+    using Blez;
 
     /// <summary>
     /// Description of MainForm.
@@ -17,22 +19,17 @@ namespace INIalaContro
     public partial class MainForm : Form
     {
         /// <summary>
+        /// The ini contents.
+        /// </summary>
+        string iniContents = string.Empty;
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="T:INIalaContro.MainForm"/> class.
         /// </summary>
         public MainForm()
         {
             // The InitializeComponent() call is required for Windows Forms designer support.
             InitializeComponent();
-        }
-
-        /// <summary>
-        /// Handles the new tool strip menu item click.
-        /// </summary>
-        /// <param name="sender">Sender.</param>
-        /// <param name="e">E.</param>
-        private void OnNewToolStripMenuItemClick(object sender, EventArgs e)
-        {
-            // TODO Add code
         }
 
         /// <summary>
@@ -92,7 +89,102 @@ namespace INIalaContro
         /// <param name="e">E.</param>
         private void OnBrowseButtonClick(object sender, EventArgs e)
         {
-            // TODO Add code
+            // Reset selected path
+            this.folderBrowserDialog.SelectedPath = string.Empty;
+
+            // Show folder browser dialog
+            if (this.folderBrowserDialog.ShowDialog() == DialogResult.OK && this.folderBrowserDialog.SelectedPath.Length > 0)
+            {
+                // Set general section
+                this.iniContents = $"[General]{Environment.NewLine}numRows={Environment.NewLine}numCols={Environment.NewLine}";
+
+                // Declare items list
+                List<string> itemList = new List<string>();
+
+                // Declare paths list
+                List<string> pathList = new List<string>();
+
+                // Set items 
+                foreach (var item in Directory.GetFileSystemEntries(this.folderBrowserDialog.SelectedPath, "*", SearchOption.AllDirectories))
+                {
+                    // Test for directory
+                    if (File.GetAttributes(item).HasFlag(FileAttributes.Directory))
+                    {
+                        // Directory
+                        itemList.Add(Path.GetDirectoryName(item));
+                        pathList.Add(item);
+                    }
+                    else
+                    {
+                        /* File */
+
+                        // Check for .lnk
+                        if (Path.GetExtension(item).ToLowerInvariant() == ".lnk")
+                        {
+                            // Add shortcut item
+                            try
+                            {
+                                itemList.Add(Path.GetFileNameWithoutExtension(item));
+                                pathList.Add(ShortcutTarget.GetShortcutTarget(item));
+                            }
+                            catch (Exception ex)
+                            {
+                                MessageBox.Show($"Shortcut processing error:{Environment.NewLine}{ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
+
+                        } // Check for .url
+                        else if (Path.GetExtension(item).ToLowerInvariant() == ".url")
+                        {
+                            // Process until URL=
+                            foreach (var line in File.ReadAllLines(item))
+                            {
+                                // Check for a "="
+                                if (line.Contains("="))
+                                {
+                                    // Set KeyValuePair
+                                    var keyValue = line.Split(new char[] { '=' });
+
+                                    if (keyValue[0].ToLowerInvariant() == "url")
+                                    {
+                                        itemList.Add(Path.GetFileNameWithoutExtension(item));
+                                        pathList.Add(keyValue[1]);
+                                    }
+                                }
+                            }
+                        } // Process other files
+                        else
+                        {
+                            itemList.Add(Path.GetFileName(item));
+                            pathList.Add(item);
+                        }
+                    }
+                }
+
+                /* Titles */
+
+                // Set titles section
+                this.iniContents += $"[Titles]{Environment.NewLine}";
+
+                // Add items
+                for (int i = 0; i < itemList.Count; i++)
+                {
+                    this.iniContents += $"Title{i + 1}={itemList[i]}{Environment.NewLine}";
+                }
+
+                /* Paths */
+
+                // Set titles section
+                this.iniContents += $"[Paths]{Environment.NewLine}";
+
+                // Add items
+                for (int i = 0; i < itemList.Count; i++)
+                {
+                    this.iniContents += $"Path{i + 1}={pathList[i]}{Environment.NewLine}";
+                }
+
+                // Set processed items in status
+                this.processedCountToolStripStatusLabel.Text = itemList.Count.ToString();
+            }
         }
 
         /// <summary>
@@ -113,22 +205,6 @@ namespace INIalaContro
         private void OnSaveButtonClick(object sender, EventArgs e)
         {
             // TODO Add code
-        }
-
-        /// <summary>
-        /// Gets the ini.
-        /// </summary>
-        /// <returns>The ini.</returns>
-        /// <param name="directoryPath">Directory path.</param>
-        private string GetIni(string directoryPath)
-        {
-            // Generated INI string
-            string ini = string.Empty;
-
-            // TODO Add code
-
-            // Return ini string
-            return ini;
         }
 
         /// <summary>

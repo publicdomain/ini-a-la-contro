@@ -32,7 +32,6 @@ namespace INIalaContro
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
 			this.mainMenuStrip = new System.Windows.Forms.MenuStrip();
 			this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
 			this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -45,7 +44,7 @@ namespace INIalaContro
 			this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.mainStatusStrip = new System.Windows.Forms.StatusStrip();
 			this.processedToolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
-			this.cycleCountToolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
+			this.processedCountToolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
 			this.mainTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
 			this.browseButton = new System.Windows.Forms.Button();
 			this.copyButton = new System.Windows.Forms.Button();
@@ -71,32 +70,21 @@ namespace INIalaContro
 			// fileToolStripMenuItem
 			// 
 			this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-			this.newToolStripMenuItem,
 			this.toolStripSeparator,
 			this.exitToolStripMenuItem});
 			this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
 			this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
 			this.fileToolStripMenuItem.Text = "&File";
 			// 
-			// newToolStripMenuItem
-			// 
-			this.newToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("newToolStripMenuItem.Image")));
-			this.newToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-			this.newToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-			this.newToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
-			this.newToolStripMenuItem.Text = "&New";
-			this.newToolStripMenuItem.Click += new System.EventHandler(this.OnNewToolStripMenuItemClick);
-			// 
 			// toolStripSeparator
 			// 
 			this.toolStripSeparator.Name = "toolStripSeparator";
-			this.toolStripSeparator.Size = new System.Drawing.Size(138, 6);
+			this.toolStripSeparator.Size = new System.Drawing.Size(89, 6);
 			// 
 			// exitToolStripMenuItem
 			// 
 			this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-			this.exitToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
+			this.exitToolStripMenuItem.Size = new System.Drawing.Size(92, 22);
 			this.exitToolStripMenuItem.Text = "E&xit";
 			this.exitToolStripMenuItem.Click += new System.EventHandler(this.OnExitToolStripMenuItemClick);
 			// 
@@ -166,7 +154,7 @@ namespace INIalaContro
 			// 
 			this.mainStatusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
 			this.processedToolStripStatusLabel,
-			this.cycleCountToolStripStatusLabel});
+			this.processedCountToolStripStatusLabel});
 			this.mainStatusStrip.Location = new System.Drawing.Point(0, 142);
 			this.mainStatusStrip.Name = "mainStatusStrip";
 			this.mainStatusStrip.Size = new System.Drawing.Size(205, 22);
@@ -179,12 +167,12 @@ namespace INIalaContro
 			this.processedToolStripStatusLabel.Size = new System.Drawing.Size(95, 17);
 			this.processedToolStripStatusLabel.Text = "Processed items:";
 			// 
-			// cycleCountToolStripStatusLabel
+			// processedCountToolStripStatusLabel
 			// 
-			this.cycleCountToolStripStatusLabel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-			this.cycleCountToolStripStatusLabel.Name = "cycleCountToolStripStatusLabel";
-			this.cycleCountToolStripStatusLabel.Size = new System.Drawing.Size(14, 17);
-			this.cycleCountToolStripStatusLabel.Text = "0";
+			this.processedCountToolStripStatusLabel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+			this.processedCountToolStripStatusLabel.Name = "processedCountToolStripStatusLabel";
+			this.processedCountToolStripStatusLabel.Size = new System.Drawing.Size(14, 17);
+			this.processedCountToolStripStatusLabel.Text = "0";
 			// 
 			// mainTableLayoutPanel
 			// 
@@ -255,6 +243,7 @@ namespace INIalaContro
 			this.Controls.Add(this.mainStatusStrip);
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.Name = "MainForm";
+			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "INI a la Contro";
 			this.mainMenuStrip.ResumeLayout(false);
 			this.mainMenuStrip.PerformLayout();
@@ -269,7 +258,7 @@ namespace INIalaContro
 		private System.Windows.Forms.Button copyButton;
 		private System.Windows.Forms.Button browseButton;
 		private System.Windows.Forms.TableLayoutPanel mainTableLayoutPanel;
-		private System.Windows.Forms.ToolStripStatusLabel cycleCountToolStripStatusLabel;
+		private System.Windows.Forms.ToolStripStatusLabel processedCountToolStripStatusLabel;
 		private System.Windows.Forms.ToolStripStatusLabel processedToolStripStatusLabel;
 		private System.Windows.Forms.StatusStrip mainStatusStrip;
 		private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
@@ -282,7 +271,6 @@ namespace INIalaContro
 		private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator;
-		private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
 		private System.Windows.Forms.MenuStrip mainMenuStrip;
 		private System.Windows.Forms.SaveFileDialog saveFileDialog;
