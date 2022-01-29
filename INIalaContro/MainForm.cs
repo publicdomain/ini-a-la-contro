@@ -35,8 +35,8 @@ namespace INIalaContro
         /// <summary>
         /// Handles the options tool strip menu item drop down item clicked.
         /// </summary>
-        /// <param name="sender">Sender.</param>
-        /// <param name="e">E.</param>
+        /// <param name="sender">Sender object.</param>
+        /// <param name="e">Event arguments.</param>
         private void OnOptionsToolStripMenuItemDropDownItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
             // TODO Add code
@@ -45,8 +45,8 @@ namespace INIalaContro
         /// <summary>
         /// Handles the free releases public domainis tool strip menu item click.
         /// </summary>
-        /// <param name="sender">Sender.</param>
-        /// <param name="e">E.</param>
+        /// <param name="sender">Sender object.</param>
+        /// <param name="e">Event arguments.</param>
         private void OnFreeReleasesPublicDomainisToolStripMenuItemClick(object sender, EventArgs e)
         {
             // TODO Add code
@@ -55,8 +55,8 @@ namespace INIalaContro
         /// <summary>
         /// Handles the original thread donation codercom tool strip menu item click.
         /// </summary>
-        /// <param name="sender">Sender.</param>
-        /// <param name="e">E.</param>
+        /// <param name="sender">Sender object.</param>
+        /// <param name="e">Event arguments.</param>
         private void OnOriginalThreadDonationCodercomToolStripMenuItemClick(object sender, EventArgs e)
         {
             // TODO Add code
@@ -65,8 +65,8 @@ namespace INIalaContro
         /// <summary>
         /// Handles the source code githubcom tool strip menu item click.
         /// </summary>
-        /// <param name="sender">Sender.</param>
-        /// <param name="e">E.</param>
+        /// <param name="sender">Sender object.</param>
+        /// <param name="e">Event arguments.</param>
         private void OnSourceCodeGithubcomToolStripMenuItemClick(object sender, EventArgs e)
         {
             // TODO Add code
@@ -75,8 +75,8 @@ namespace INIalaContro
         /// <summary>
         /// Handles the about tool strip menu item click.
         /// </summary>
-        /// <param name="sender">Sender.</param>
-        /// <param name="e">E.</param>
+        /// <param name="sender">Sender object.</param>
+        /// <param name="e">Event arguments.</param>
         private void OnAboutToolStripMenuItemClick(object sender, EventArgs e)
         {
             // TODO Add code
@@ -85,8 +85,8 @@ namespace INIalaContro
         /// <summary>
         /// Handles the browse button click.
         /// </summary>
-        /// <param name="sender">Sender.</param>
-        /// <param name="e">E.</param>
+        /// <param name="sender">Sender object.</param>
+        /// <param name="e">Event arguments.</param>
         private void OnBrowseButtonClick(object sender, EventArgs e)
         {
             // Reset selected path
@@ -190,8 +190,8 @@ namespace INIalaContro
         /// <summary>
         /// Handles the copy button click.
         /// </summary>
-        /// <param name="sender">Sender.</param>
-        /// <param name="e">E.</param>
+        /// <param name="sender">Sender object.</param>
+        /// <param name="e">Event arguments.</param>
         private void OnCopyButtonClick(object sender, EventArgs e)
         {
             // TODO Check there's something to work with [Can be made DRY]
@@ -214,8 +214,8 @@ namespace INIalaContro
         /// <summary>
         /// Handles the save button click.
         /// </summary>
-        /// <param name="sender">Sender.</param>
-        /// <param name="e">E.</param>
+        /// <param name="sender">Sender object.</param>
+        /// <param name="e">Event arguments.</param>
         private void OnSaveButtonClick(object sender, EventArgs e)
         {
             // TODO Check there's something to work with [Can be made DRY]
@@ -251,11 +251,12 @@ namespace INIalaContro
         /// <summary>
         /// Handles the exit tool strip menu item click.
         /// </summary>
-        /// <param name="sender">Sender.</param>
-        /// <param name="e">E.</param>
+        /// <param name="sender">Sender object.</param>
+        /// <param name="e">Event arguments.</param>
         private void OnExitToolStripMenuItemClick(object sender, EventArgs e)
         {
-            // TODO Add code
+            // Close program
+            this.Close();
         }
     }
 }
