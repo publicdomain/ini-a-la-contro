@@ -194,7 +194,21 @@ namespace INIalaContro
         /// <param name="e">E.</param>
         private void OnCopyButtonClick(object sender, EventArgs e)
         {
-            // TODO Add code
+            // Check there's something to work with
+            if (this.iniContents.Length == 0)
+            {
+                // Advise user
+                MessageBox.Show("Please set target directory first.", "Missng folder", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+            else
+            {
+                // Copy ini file contents
+                Clipboard.Clear();
+                Clipboard.SetText(this.iniContents);
+
+                // Advise user
+                MessageBox.Show("Ini file contents have bee copied..", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
         /// <summary>
