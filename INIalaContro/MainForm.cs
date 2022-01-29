@@ -194,11 +194,11 @@ namespace INIalaContro
         /// <param name="e">E.</param>
         private void OnCopyButtonClick(object sender, EventArgs e)
         {
-            // Check there's something to work with
+            // TODO Check there's something to work with [Can be made DRY]
             if (this.iniContents.Length == 0)
             {
                 // Advise user
-                MessageBox.Show("Please set target directory first.", "Missng folder", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("Please set target directory.", "Missng folder", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
             else
             {
@@ -218,7 +218,34 @@ namespace INIalaContro
         /// <param name="e">E.</param>
         private void OnSaveButtonClick(object sender, EventArgs e)
         {
-            // TODO Add code
+            // TODO Check there's something to work with [Can be made DRY]
+            if (this.iniContents.Length == 0)
+            {
+                // Advise user
+                MessageBox.Show("Please set target directory.", "Missng folder", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+            else
+            {// Reset save file dialog
+                this.saveFileDialog.FileName = string.Empty;
+
+                // Open save file dialog
+                if (this.saveFileDialog.ShowDialog() == DialogResult.OK && this.saveFileDialog.FileName.Length > 0)
+                {
+                    try
+                    {
+                        // Save to file
+                        File.WriteAllText(this.saveFileDialog.FileName, this.iniContents);
+                    }
+                    catch (Exception exception)
+                    {
+                        // Inform user
+                        MessageBox.Show($"Error when saving to \"{Path.GetFileName(this.saveFileDialog.FileName)}\":{Environment.NewLine}{exception.Message}", "Save file error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+
+                    // Inform user
+                    MessageBox.Show($"Saved {this.processedCountToolStripStatusLabel.Text} items to \"{Path.GetFileName(this.saveFileDialog.FileName)}\"", "File saved", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
         }
 
         /// <summary>
