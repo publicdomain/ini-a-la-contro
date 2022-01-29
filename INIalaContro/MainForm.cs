@@ -29,7 +29,7 @@ namespace INIalaContro
         public MainForm()
         {
             // The InitializeComponent() call is required for Windows Forms designer support.
-            InitializeComponent();
+            this.InitializeComponent();
         }
 
         /// <summary>
@@ -39,7 +39,14 @@ namespace INIalaContro
         /// <param name="e">Event arguments.</param>
         private void OnOptionsToolStripMenuItemDropDownItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
-            // TODO Add code
+            // Set tool strip menu item
+            ToolStripMenuItem toolStripMenuItem = (ToolStripMenuItem)e.ClickedItem;
+
+            // Toggle checked
+            toolStripMenuItem.Checked = !toolStripMenuItem.Checked;
+
+            // Set topmost by check box
+            this.TopMost = this.alwaysOnTopToolStripMenuItem.Checked;
         }
 
         /// <summary>
