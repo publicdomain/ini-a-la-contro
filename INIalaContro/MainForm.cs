@@ -167,96 +167,106 @@ namespace INIalaContro
             // Show folder browser dialog
             if (this.folderBrowserDialog.ShowDialog() == DialogResult.OK && this.folderBrowserDialog.SelectedPath.Length > 0)
             {
-                // Set general section
-                this.iniContents = $"[General]{Environment.NewLine}numRows={Environment.NewLine}numCols={Environment.NewLine}";
+                // Process the directory
+                this.ProcessDirectory(this.folderBrowserDialog.SelectedPath);
+            }
+        }
 
-                // Declare items list
-                List<string> itemList = new List<string>();
+        /// <summary>
+        /// Processes the directory.
+        /// </summary>
+        /// <param name="directoryPath">Directory path.</param>
+        private void ProcessDirectory(string directoryPath)
+        {
+            // Set general section
+            this.iniContents = $"[General]{Environment.NewLine}numRows={Environment.NewLine}numCols={Environment.NewLine}";
 
-                // Declare paths list
-                List<string> pathList = new List<string>();
+            // Declare items list
+            List<string> itemList = new List<string>();
 
-                // Set items 
-                foreach (var item in Directory.GetFileSystemEntries(this.folderBrowserDialog.SelectedPath, "*", SearchOption.TopDirectoryOnly))
+            // Declare paths list
+            List<string> pathList = new List<string>();
+
+            // Set items 
+            foreach (var item in Directory.GetFileSystemEntries(directoryPath, "*", SearchOption.TopDirectoryOnly))
+            {
+                // Test for directory
+                if (File.GetAttributes(item).HasFlag(FileAttributes.Directory))
                 {
-                    // Test for directory
-                    if (File.GetAttributes(item).HasFlag(FileAttributes.Directory))
-                    {
-                        // Directory
-                        itemList.Add(Path.GetDirectoryName(item));
-                        pathList.Add(item);
-                    }
-                    else
-                    {
-                        /* File */
+                    // Directory
+                    itemList.Add(Path.GetDirectoryName(item));
+                    pathList.Add(item);
+                }
+                else
+                {
+                    /* File */
 
-                        // Check for .lnk
-                        if (Path.GetExtension(item).ToLowerInvariant() == ".lnk")
+                    // Check for .lnk
+                    if (Path.GetExtension(item).ToLowerInvariant() == ".lnk")
+                    {
+                        // Add shortcut item
+                        try
                         {
-                            // Add shortcut item
-                            try
-                            {
-                                itemList.Add(Path.GetFileNameWithoutExtension(item));
-                                pathList.Add(ShortcutTarget.GetShortcutTarget(item));
-                            }
-                            catch (Exception ex)
-                            {
-                                MessageBox.Show($"Shortcut processing error:{Environment.NewLine}{ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            }
+                            itemList.Add(Path.GetFileNameWithoutExtension(item));
+                            pathList.Add(ShortcutTarget.GetShortcutTarget(item));
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show($"Shortcut processing error:{Environment.NewLine}{ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
 
-                        } // Check for .url
-                        else if (Path.GetExtension(item).ToLowerInvariant() == ".url")
+                    } // Check for .url
+                    else if (Path.GetExtension(item).ToLowerInvariant() == ".url")
+                    {
+                        // Process until URL=
+                        foreach (var line in File.ReadAllLines(item))
                         {
-                            // Process until URL=
-                            foreach (var line in File.ReadAllLines(item))
+                            // Check for a "="
+                            if (line.Contains("="))
                             {
-                                // Check for a "="
-                                if (line.Contains("="))
+                                // Set KeyValuePair
+                                var keyValue = line.Split(new char[] { '=' });
+
+                                if (keyValue[0].ToLowerInvariant() == "url")
                                 {
-                                    // Set KeyValuePair
-                                    var keyValue = line.Split(new char[] { '=' });
-
-                                    if (keyValue[0].ToLowerInvariant() == "url")
-                                    {
-                                        itemList.Add(Path.GetFileNameWithoutExtension(item));
-                                        pathList.Add(keyValue[1]);
-                                    }
+                                    itemList.Add(Path.GetFileNameWithoutExtension(item));
+                                    pathList.Add(keyValue[1]);
                                 }
                             }
-                        } // Process other files
-                        else
-                        {
-                            itemList.Add(Path.GetFileName(item));
-                            pathList.Add(item);
                         }
+                    } // Process other files
+                    else
+                    {
+                        itemList.Add(Path.GetFileName(item));
+                        pathList.Add(item);
                     }
                 }
-
-                /* Titles */
-
-                // Set titles section
-                this.iniContents += $"[Titles]{Environment.NewLine}";
-
-                // Add items
-                for (int i = 0; i < itemList.Count; i++)
-                {
-                    this.iniContents += $"Title{i + 1}={itemList[i]}{Environment.NewLine}";
-                }
-
-                /* Paths */
-
-                // Set titles section
-                this.iniContents += $"[Paths]{Environment.NewLine}";
-
-                // Add items
-                for (int i = 0; i < itemList.Count; i++)
-                {
-                    this.iniContents += $"Path{i + 1}={pathList[i]}{Environment.NewLine}";
-                }
-
-                // Set processed items in status
-                this.processedCountToolStripStatusLabel.Text = itemList.Count.ToString();
             }
+
+            /* Titles */
+
+            // Set titles section
+            this.iniContents += $"[Titles]{Environment.NewLine}";
+
+            // Add items
+            for (int i = 0; i < itemList.Count; i++)
+            {
+                this.iniContents += $"Title{i + 1}={itemList[i]}{Environment.NewLine}";
+            }
+
+            /* Paths */
+
+            // Set titles section
+            this.iniContents += $"[Paths]{Environment.NewLine}";
+
+            // Add items
+            for (int i = 0; i < itemList.Count; i++)
+            {
+                this.iniContents += $"Path{i + 1}={pathList[i]}{Environment.NewLine}";
+            }
+
+            // Set processed items in status
+            this.processedCountToolStripStatusLabel.Text = itemList.Count.ToString();
         }
 
         /// <summary>
