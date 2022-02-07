@@ -338,7 +338,8 @@ namespace INIalaContro
         /// <param name="e">E.</param>
         private void OnBrowseButtonDragEnter(object sender, DragEventArgs e)
         {
-            // TODO Add code
+            // Check for some possible directories and set effect accordingly
+            e.Effect = e.Data.GetDataPresent(DataFormats.FileDrop, false) ? DragDropEffects.All : DragDropEffects.None;
         }
 
         private void OnBrowseButtonDragLeave(object sender, EventArgs e)
