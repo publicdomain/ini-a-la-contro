@@ -177,7 +177,7 @@ namespace INIalaContro
                 List<string> pathList = new List<string>();
 
                 // Set items 
-                foreach (var item in Directory.GetFileSystemEntries(this.folderBrowserDialog.SelectedPath, "*", SearchOption.AllDirectories))
+                foreach (var item in Directory.GetFileSystemEntries(this.folderBrowserDialog.SelectedPath, "*", SearchOption.TopDirectoryOnly))
                 {
                     // Test for directory
                     if (File.GetAttributes(item).HasFlag(FileAttributes.Directory))
@@ -297,7 +297,8 @@ namespace INIalaContro
                 MessageBox.Show("Please set target directory.", "Missng folder", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
             else
-            {// Reset save file dialog
+            {
+                // Reset save file dialog
                 this.saveFileDialog.FileName = string.Empty;
 
                 // Open save file dialog
@@ -318,6 +319,31 @@ namespace INIalaContro
                     MessageBox.Show($"Saved {this.processedCountToolStripStatusLabel.Text} items to \"{Path.GetFileName(this.saveFileDialog.FileName)}\"", "File saved", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
+        }
+
+        /// <summary>
+        /// Ons the browse button drag drop.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="e">E.</param>
+        private void OnBrowseButtonDragDrop(object sender, DragEventArgs e)
+        {
+            // TODO Add code
+        }
+
+        /// <summary>
+        /// Ons the browse button drag enter.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="e">E.</param>
+        private void OnBrowseButtonDragEnter(object sender, DragEventArgs e)
+        {
+            // TODO Add code
+        }
+
+        private void OnBrowseButtonDragLeave(object sender, EventArgs e)
+        {
+            // TODO Add code
         }
 
         /// <summary>
