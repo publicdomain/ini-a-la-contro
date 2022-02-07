@@ -179,7 +179,7 @@ namespace INIalaContro
         private void ProcessDirectory(string directoryPath)
         {
             // Set general section
-            this.iniContents = $"[General]{Environment.NewLine}numRows={Environment.NewLine}numCols={Environment.NewLine}";
+            this.iniContents = $"[General]{Environment.NewLine}numRows=25{Environment.NewLine}numCols=9{Environment.NewLine}";
 
             // Declare items list
             List<string> itemList = new List<string>();
@@ -304,13 +304,10 @@ namespace INIalaContro
             if (this.iniContents.Length == 0)
             {
                 // Advise user
-                MessageBox.Show("Please set target directory.", "Missng folder", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("Please set target directory.", "Missing folder", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
             else
             {
-                // Reset save file dialog
-                this.saveFileDialog.FileName = string.Empty;
-
                 // Open save file dialog
                 if (this.saveFileDialog.ShowDialog() == DialogResult.OK && this.saveFileDialog.FileName.Length > 0)
                 {
@@ -348,7 +345,32 @@ namespace INIalaContro
         /// <param name="e">Event arguments.</param>
         private void OnBrowseButtonDragDrop(object sender, DragEventArgs e)
         {
-            // TODO Add code
+            // Default count
+            int count = 0;
+
+            // Iterate dropped
+            foreach (string directory in (string[])e.Data.GetData(DataFormats.FileDrop, false))
+            {
+                // Check for directory
+                if (Directory.Exists(directory))
+                {
+                    // Generate ini
+                    this.ProcessDirectory(directory);
+
+                    // Save generated ini file
+                    this.SaveIniFile(Path.Combine(directory, "launcher.ini"));
+
+                    // Raise count
+                    count++;
+                }
+            }
+
+            // Check if must advise user
+            if (count > 0)
+            {
+                // Advise user
+                MessageBox.Show($"Saved {count} launcher.ini file{(count > 1 ? "s" : string.Empty)}.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
         /// <summary>
