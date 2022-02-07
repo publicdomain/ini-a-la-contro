@@ -289,7 +289,7 @@ namespace INIalaContro
                 Clipboard.SetText(this.iniContents);
 
                 // Advise user
-                MessageBox.Show("Ini file contents have bee copied..", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Ini file contents have been copied..", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -314,16 +314,8 @@ namespace INIalaContro
                 // Open save file dialog
                 if (this.saveFileDialog.ShowDialog() == DialogResult.OK && this.saveFileDialog.FileName.Length > 0)
                 {
-                    try
-                    {
-                        // Save to file
-                        File.WriteAllText(this.saveFileDialog.FileName, this.iniContents);
-                    }
-                    catch (Exception exception)
-                    {
-                        // Inform user
-                        MessageBox.Show($"Error when saving to \"{Path.GetFileName(this.saveFileDialog.FileName)}\":{Environment.NewLine}{exception.Message}", "Save file error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
+                    // Save ini file
+                    this.SaveIniFile(this.saveFileDialog.FileName);
 
                     // Inform user
                     MessageBox.Show($"Saved {this.processedCountToolStripStatusLabel.Text} items to \"{Path.GetFileName(this.saveFileDialog.FileName)}\"", "File saved", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -332,26 +324,49 @@ namespace INIalaContro
         }
 
         /// <summary>
-        /// Ons the browse button drag drop.
+        /// Saves the ini file.
         /// </summary>
-        /// <param name="sender">Sender.</param>
-        /// <param name="e">E.</param>
+        /// <param name="iniFilePath">Ini file path.</param>
+        private void SaveIniFile(string iniFilePath)
+        {
+            try
+            {
+                // Save to file
+                File.WriteAllText(iniFilePath, this.iniContents);
+            }
+            catch (Exception exception)
+            {
+                // Inform user
+                MessageBox.Show($"Error when saving to \"{Path.GetFileName(this.saveFileDialog.FileName)}\":{Environment.NewLine}{exception.Message}", "Save file error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        /// <summary>
+        /// Handles the browse button drag drop.
+        /// </summary>
+        /// <param name="sender">Sender object.</param>
+        /// <param name="e">Event arguments.</param>
         private void OnBrowseButtonDragDrop(object sender, DragEventArgs e)
         {
             // TODO Add code
         }
 
         /// <summary>
-        /// Ons the browse button drag enter.
+        /// Handles the browse button drag enter.
         /// </summary>
-        /// <param name="sender">Sender.</param>
-        /// <param name="e">E.</param>
+        /// <param name="sender">Sender object.</param>
+        /// <param name="e">Event arguments.</param>
         private void OnBrowseButtonDragEnter(object sender, DragEventArgs e)
         {
             // Check for some possible directories and set effect accordingly
             e.Effect = e.Data.GetDataPresent(DataFormats.FileDrop, false) ? DragDropEffects.All : DragDropEffects.None;
         }
 
+        /// <summary>
+        /// Handles the browse button drag leave.
+        /// </summary>
+        /// <param name="sender">Sender object.</param>
+        /// <param name="e">Event arguments.</param>
         private void OnBrowseButtonDragLeave(object sender, EventArgs e)
         {
             // TODO Add code

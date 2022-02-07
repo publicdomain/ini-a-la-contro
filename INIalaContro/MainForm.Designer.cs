@@ -204,6 +204,7 @@ namespace INIalaContro
         	this.browseButton.TabIndex = 0;
         	this.browseButton.Text = "&Browse";
         	this.browseButton.UseVisualStyleBackColor = true;
+        	this.browseButton.Click += new System.EventHandler(this.OnBrowseButtonClick);
         	this.browseButton.DragDrop += new System.Windows.Forms.DragEventHandler(this.OnBrowseButtonDragDrop);
         	this.browseButton.DragEnter += new System.Windows.Forms.DragEventHandler(this.OnBrowseButtonDragEnter);
         	this.browseButton.DragLeave += new System.EventHandler(this.OnBrowseButtonDragLeave);
@@ -218,6 +219,7 @@ namespace INIalaContro
         	this.copyButton.TabIndex = 1;
         	this.copyButton.Text = "&Copy";
         	this.copyButton.UseVisualStyleBackColor = true;
+        	this.copyButton.Click += new System.EventHandler(this.OnCopyButtonClick);
         	// 
         	// saveButton
         	// 
@@ -229,6 +231,7 @@ namespace INIalaContro
         	this.saveButton.TabIndex = 2;
         	this.saveButton.Text = "&Save";
         	this.saveButton.UseVisualStyleBackColor = true;
+        	this.saveButton.Click += new System.EventHandler(this.OnSaveButtonClick);
         	// 
         	// saveFileDialog
         	// 
