@@ -33,6 +33,11 @@ namespace INIalaContro
         private Icon associatedIcon = null;
 
         /// <summary>
+        /// The settings data.
+        /// </summary>
+        private SettingsData settingsData = null;
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="T:INIalaContro.MainForm"/> class.
         /// </summary>
         public MainForm()
@@ -397,13 +402,31 @@ namespace INIalaContro
         private void OnConfigureLNKParserToolStripMenuItemClick(object sender, EventArgs e)
         {
             // Open LNK configuration window
-            var configureLnkParserForm = new ConfigureLnkParserForm
+            var configureLnkParserForm = new ConfigureLnkParserForm(this.settingsData)
             {
                 Icon = this.Icon
             };
 
             // Show it
             configureLnkParserForm.ShowDialog();
+        }
+
+        /// <summary>
+        /// Loads the settings file.
+        /// </summary>
+        /// <returns>The settings file.</returns>
+        /// <param name="settingsFilePath">Settings file path.</param>
+        private SettingsData LoadSettingsFile(string settingsFilePath)
+        {
+            // Use file stream
+            using (FileStream fileStream = File.OpenRead(settingsFilePath))
+            {
+                // Set xml serialzer
+                XmlSerializer xmlSerializer = new XmlSerializer(typeof(SettingsData));
+
+                // Return populated settings data
+                return xmlSerializer.Deserialize(fileStream) as SettingsData;
+            }
         }
 
         /// <summary>
