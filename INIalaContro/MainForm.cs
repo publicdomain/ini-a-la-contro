@@ -369,7 +369,7 @@ namespace INIalaContro
             if (count > 0)
             {
                 // Advise user
-                MessageBox.Show($"Saved {count} launcher.ini file{(count > 1 ? "s" : string.Empty)}.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                //#                MessageBox.Show($"Saved {count} launcher.ini file{(count > 1 ? "s" : string.Empty)}.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -392,6 +392,18 @@ namespace INIalaContro
         private void OnBrowseButtonDragLeave(object sender, EventArgs e)
         {
             // TODO Add code
+        }
+
+        private void OnConfigureLNKParserToolStripMenuItemClick(object sender, EventArgs e)
+        {
+            // Open LNK configuration window
+            var configureLnkParserForm = new ConfigureLnkParserForm
+            {
+                Icon = this.Icon
+            };
+
+            // Show it
+            configureLnkParserForm.ShowDialog();
         }
 
         /// <summary>
