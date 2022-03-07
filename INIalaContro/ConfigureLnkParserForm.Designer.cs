@@ -35,13 +35,15 @@ namespace INIalaContro
 			this.regexLabel = new System.Windows.Forms.Label();
 			this.groupLabel = new System.Windows.Forms.Label();
 			this.regexTextBox = new System.Windows.Forms.TextBox();
-			this.groupTextBox = new System.Windows.Forms.TextBox();
 			this.argumentsTextBox = new System.Windows.Forms.TextBox();
 			this.executablePathButton = new System.Windows.Forms.Button();
 			this.okButtonTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
 			this.okButton = new System.Windows.Forms.Button();
+			this.groupNumericUpDown = new System.Windows.Forms.NumericUpDown();
+			this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
 			this.lnkTableLayoutPanel.SuspendLayout();
 			this.okButtonTableLayoutPanel.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.groupNumericUpDown)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// lnkTableLayoutPanel
@@ -54,10 +56,10 @@ namespace INIalaContro
 			this.lnkTableLayoutPanel.Controls.Add(this.regexLabel, 0, 2);
 			this.lnkTableLayoutPanel.Controls.Add(this.groupLabel, 0, 3);
 			this.lnkTableLayoutPanel.Controls.Add(this.regexTextBox, 1, 2);
-			this.lnkTableLayoutPanel.Controls.Add(this.groupTextBox, 1, 3);
 			this.lnkTableLayoutPanel.Controls.Add(this.argumentsTextBox, 1, 1);
 			this.lnkTableLayoutPanel.Controls.Add(this.executablePathButton, 1, 0);
 			this.lnkTableLayoutPanel.Controls.Add(this.okButtonTableLayoutPanel, 0, 4);
+			this.lnkTableLayoutPanel.Controls.Add(this.groupNumericUpDown, 1, 3);
 			this.lnkTableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.lnkTableLayoutPanel.Location = new System.Drawing.Point(0, 0);
 			this.lnkTableLayoutPanel.Name = "lnkTableLayoutPanel";
@@ -123,15 +125,6 @@ namespace INIalaContro
 			this.regexTextBox.Size = new System.Drawing.Size(167, 26);
 			this.regexTextBox.TabIndex = 2;
 			// 
-			// groupTextBox
-			// 
-			this.groupTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.groupTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.groupTextBox.Location = new System.Drawing.Point(118, 99);
-			this.groupTextBox.Name = "groupTextBox";
-			this.groupTextBox.Size = new System.Drawing.Size(167, 26);
-			this.groupTextBox.TabIndex = 3;
-			// 
 			// argumentsTextBox
 			// 
 			this.argumentsTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -179,10 +172,34 @@ namespace INIalaContro
 			this.okButton.Margin = new System.Windows.Forms.Padding(1);
 			this.okButton.Name = "okButton";
 			this.okButton.Size = new System.Drawing.Size(142, 29);
-			this.okButton.TabIndex = 0;
+			this.okButton.TabIndex = 4;
 			this.okButton.Text = "&OK";
 			this.okButton.UseVisualStyleBackColor = true;
 			this.okButton.Click += new System.EventHandler(this.OnOkButtonClick);
+			// 
+			// groupNumericUpDown
+			// 
+			this.groupNumericUpDown.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.groupNumericUpDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+			this.groupNumericUpDown.Location = new System.Drawing.Point(118, 99);
+			this.groupNumericUpDown.Minimum = new decimal(new int[] {
+									1,
+									0,
+									0,
+									0});
+			this.groupNumericUpDown.Name = "groupNumericUpDown";
+			this.groupNumericUpDown.Size = new System.Drawing.Size(167, 26);
+			this.groupNumericUpDown.TabIndex = 3;
+			this.groupNumericUpDown.Value = new decimal(new int[] {
+									1,
+									0,
+									0,
+									0});
+			// 
+			// openFileDialog
+			// 
+			this.openFileDialog.Filter = "Exe Files (.exe)|*.exe|All Files (*.*)|*.*";
+			this.openFileDialog.Title = "LNK parser path";
 			// 
 			// ConfigureLnkParserForm
 			// 
@@ -192,18 +209,21 @@ namespace INIalaContro
 			this.ClientSize = new System.Drawing.Size(288, 159);
 			this.Controls.Add(this.lnkTableLayoutPanel);
 			this.Name = "ConfigureLnkParserForm";
-			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "Configure LNK Parser";
+			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.OnConfigureLnkParserFormFormClosing);
 			this.lnkTableLayoutPanel.ResumeLayout(false);
 			this.lnkTableLayoutPanel.PerformLayout();
 			this.okButtonTableLayoutPanel.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.groupNumericUpDown)).EndInit();
 			this.ResumeLayout(false);
 		}
+		private System.Windows.Forms.OpenFileDialog openFileDialog;
+		private System.Windows.Forms.NumericUpDown groupNumericUpDown;
 		private System.Windows.Forms.Button okButton;
 		private System.Windows.Forms.TableLayoutPanel okButtonTableLayoutPanel;
 		private System.Windows.Forms.Button executablePathButton;
 		private System.Windows.Forms.TextBox argumentsTextBox;
-		private System.Windows.Forms.TextBox groupTextBox;
 		private System.Windows.Forms.TextBox regexTextBox;
 		private System.Windows.Forms.Label groupLabel;
 		private System.Windows.Forms.Label regexLabel;

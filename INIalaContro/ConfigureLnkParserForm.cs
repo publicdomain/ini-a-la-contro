@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
 using PublicDomain;
@@ -17,6 +16,17 @@ namespace INIalaContro
         SettingsData settingsData = null;
 
         /// <summary>
+        /// The settings data.
+        /// </summary>
+        public SettingsData SettingsData
+        {
+            get
+            {
+                return settingsData;
+            }
+        }
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="T:INIalaContro.ConfigureLnkParserForm"/> class.
         /// </summary>
         /// <param name="settingsData">Settings data.</param>
@@ -26,14 +36,8 @@ namespace INIalaContro
             this.InitializeComponent();
 
             // Set settings data
-            this.SettingsData = settingsData;
+            this.settingsData = settingsData;
         }
-
-        /// <summary>
-        /// Gets or sets the settings data.
-        /// </summary>
-        /// <value>The settings data.</value>
-        public SettingsData SettingsData { get => settingsData; set => settingsData = value; }
 
         /// <summary>
         /// Handles the executable path button click.
@@ -51,6 +55,16 @@ namespace INIalaContro
         /// <param name="sender">Sender object.</param>
         /// <param name="e">Event arguments.</param>
         private void OnOkButtonClick(object sender, EventArgs e)
+        {
+            // TODO Add code
+        }
+
+        /// <summary>
+        /// Handles the configure lnk parser form form closing.
+        /// </summary>
+        /// <param name="sender">Sender object.</param>
+        /// <param name="e">Event arguments.</param>
+        private void OnConfigureLnkParserFormFormClosing(object sender, FormClosingEventArgs e)
         {
             // TODO Add code
         }

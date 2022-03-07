@@ -23,51 +23,27 @@ namespace PublicDomain
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether this <see cref="T:PublicDomain.SettingsData"/> always on top.
+        /// Gets or sets the executable path.
         /// </summary>
-        /// <value><c>true</c> if always on top; otherwise, <c>false</c>.</value>
-        public bool AlwaysOnTop { get; set; } = false;
+        /// <value>The executable path.</value>
+        public string ExecutablePath { get; set; } = string.Empty;
 
         /// <summary>
-        /// Gets or sets a value indicating whether this <see cref="T:PublicDomain.SettingsData"/> add checked.
+        /// Gets or sets the arguments.
         /// </summary>
-        /// <value><c>true</c> if add checked; otherwise, <c>false</c>.</value>
-        public bool AddChecked { get; set; } = true;
+        /// <value>The arguments.</value>
+        public string Arguments { get; set; } = string.Empty;
 
         /// <summary>
-        /// Gets or sets a value indicating whether this <see cref="T:PublicDomain.SettingsData"/> check on click.
+        /// Gets or sets the regex.
         /// </summary>
-        /// <value><c>true</c> if check on click; otherwise, <c>false</c>.</value>
-        public bool CheckOnClick { get; set; } = false;
+        /// <value>The regex.</value>
+        public string Regex { get; set; } = string.Empty;
 
         /// <summary>
-        /// Gets or sets a value indicating whether this <see cref="T:PublicDomain.SettingsData"/> scan subdirectories.
+        /// Gets or sets the group.
         /// </summary>
-        /// <value><c>true</c> if scan subdirectories; otherwise, <c>false</c>.</value>
-        public bool ScanSubdirectories { get; set; } = true;
-
-        /// <summary>
-        /// Gets or sets the samples.
-        /// </summary>
-        /// <value>The samples.</value>
-        public decimal Samples { get; set; } = 16;
-
-        /// <summary>
-        /// Gets or sets a value indicating whether this <see cref="T:PublicDomain.SettingsData"/> sequential save.
-        /// </summary>
-        /// <value><c>true</c> if sequential save; otherwise, <c>false</c>.</value>
-        public bool SequentialSave { get; set; } = true;
-
-        /// <summary>
-        /// Gets or sets the file extensions.
-        /// </summary>
-        /// <value>The file extensions.</value>
-        public string FileExtensions { get; set; } = "wav,flac,ogg,mp3";
-
-        /// <summary>
-        /// Gets or sets the samples directory.
-        /// </summary>
-        /// <value>The samples directory.</value>
-        public string samplesDirectory { get; set; } = string.Empty;
+        /// <value>The group.</value>
+        public int Group { get; set; } = 1;
     }
 }

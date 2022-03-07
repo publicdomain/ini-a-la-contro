@@ -175,6 +175,12 @@ namespace INIalaContro
             {
                 // Process the directory
                 this.ProcessDirectory(this.folderBrowserDialog.SelectedPath);
+
+                // Save generated ini file
+                this.SaveIniFile(Path.Combine(this.folderBrowserDialog.SelectedPath, "launcher.ini"));
+
+                // Advise user
+                MessageBox.Show($"Saved launcher.ini file.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -375,7 +381,7 @@ namespace INIalaContro
             if (count > 0)
             {
                 // Advise user
-                //#                MessageBox.Show($"Saved {count} launcher.ini file{(count > 1 ? "s" : string.Empty)}.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show($"Saved {count} launcher.ini file{(count > 1 ? "s" : string.Empty)}.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
