@@ -11,32 +11,12 @@ namespace INIalaContro
     public partial class ConfigureLnkParserForm : Form
     {
         /// <summary>
-        /// The settings data.
-        /// </summary>
-        SettingsData settingsData = null;
-
-        /// <summary>
-        /// The settings data.
-        /// </summary>
-        public SettingsData SettingsData
-        {
-            get
-            {
-                return settingsData;
-            }
-        }
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="T:INIalaContro.ConfigureLnkParserForm"/> class.
         /// </summary>
-        /// <param name="settingsData">Settings data.</param>
-        public ConfigureLnkParserForm(SettingsData settingsData)
+        public ConfigureLnkParserForm()
         {
             // The InitializeComponent() call is required for Windows Forms designer support.
             this.InitializeComponent();
-
-            // Set settings data
-            this.settingsData = settingsData;
         }
 
         /// <summary>
@@ -46,7 +26,11 @@ namespace INIalaContro
         /// <param name="e">Event arguments.</param>
         private void OnExecutablePathButtonClick(object sender, EventArgs e)
         {
-            // TODO Add code
+            // Clear file name
+            this.openFileDialog.FileName = string.Empty;
+
+            // Show open file dialog
+            this.openFileDialog.ShowDialog();
         }
 
         /// <summary>
@@ -66,7 +50,27 @@ namespace INIalaContro
         /// <param name="e">Event arguments.</param>
         private void OnConfigureLnkParserFormFormClosing(object sender, FormClosingEventArgs e)
         {
-            // TODO Add code
+            // Executable path
+            if (this.openFileDialog.FileName.Length > 0)
+            {
+                ((MainForm)this.Owner).SettingsData.ExecutablePath = this.openFileDialog.FileName;
+            }
+
+            // Arguments
+            if (this.argumentsTextBox.Text.Length > 0)
+            {
+                ((MainForm)this.Owner).SettingsData.Arguments = this.argumentsTextBox.Text;
+            }
+
+            // Regex
+            if (this.regexTextBox.Text.Length > 0)
+            {
+                ((MainForm)this.Owner).SettingsData.Regex = this.regexTextBox.Text;
+            }
+
+            // Group
+            ((MainForm)this.Owner).SettingsData.Group = (int)this.groupNumericUpDown.Value;
         }
     }
 }
+

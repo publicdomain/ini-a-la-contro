@@ -36,7 +36,12 @@ namespace INIalaContro
         /// <summary>
         /// The settings data.
         /// </summary>
-        private SettingsData settingsData = null;
+        public SettingsData SettingsData { get; set; }
+
+        /// <summary>
+        /// The settings data path.
+        /// </summary>
+        private string settingsDataPath = $"{Application.ProductName}-SettingsData.txt";
 
         /// <summary>
         /// Initializes a new instance of the <see cref="T:INIalaContro.MainForm"/> class.
@@ -53,6 +58,18 @@ namespace INIalaContro
 
             // Set public domain weekly tool strip menu item image
             this.freeReleasesPublicDomainisToolStripMenuItem.Image = this.associatedIcon.ToBitmap();
+
+            /* Process settings */
+
+            // Check for settings file
+            if (!File.Exists(this.settingsDataPath))
+            {
+                // Create new settings file
+                this.SaveSettingsFile(this.settingsDataPath, new SettingsData());
+            }
+
+            // Load settings from disk
+            this.SettingsData = this.LoadSettingsFile(this.settingsDataPath);
         }
 
         /// <summary>
@@ -406,16 +423,21 @@ namespace INIalaContro
             // TODO Add code
         }
 
+        /// <summary>
+        /// Ons the configure LNK Parser tool strip menu item click.
+        /// </summary>
+        /// <param name="sender">Sender object.</param>
+        /// <param name="e">Event arguments.</param>
         private void OnConfigureLNKParserToolStripMenuItemClick(object sender, EventArgs e)
         {
             // Open LNK configuration window
-            var configureLnkParserForm = new ConfigureLnkParserForm(this.settingsData)
+            var configureLnkParserForm = new ConfigureLnkParserForm()
             {
                 Icon = this.Icon
             };
 
             // Show it
-            configureLnkParserForm.ShowDialog();
+            configureLnkParserForm.ShowDialog(this);
         }
 
         /// <summary>
