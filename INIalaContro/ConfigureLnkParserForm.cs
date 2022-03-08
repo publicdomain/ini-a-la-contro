@@ -40,7 +40,8 @@ namespace INIalaContro
         /// <param name="e">Event arguments.</param>
         private void OnOkButtonClick(object sender, EventArgs e)
         {
-            // TODO Add code
+            // Close dialog
+            this.Close();
         }
 
         /// <summary>
