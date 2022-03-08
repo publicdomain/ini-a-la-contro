@@ -541,7 +541,11 @@ namespace INIalaContro
         /// <param name="e">Event arguments.</param>
         private void OnMainFormLoad(object sender, EventArgs e)
         {
-            // TODO Add code
+            // Set always on top option
+            this.alwaysOnTopToolStripMenuItem.Checked = this.SettingsData.AlwaysOnTop;
+
+            // Hack Topmost on start [DEBUG]
+            this.TopMost = this.SettingsData.AlwaysOnTop;
         }
 
         /// <summary>
