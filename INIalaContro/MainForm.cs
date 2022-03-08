@@ -534,6 +534,29 @@ namespace INIalaContro
             }
         }
 
+        /// <summary>
+        /// Handles the main form load.
+        /// </summary>
+        /// <param name="sender">Sender object.</param>
+        /// <param name="e">Event arguments.</param>
+        private void OnMainFormLoad(object sender, EventArgs e)
+        {
+            // TODO Add code
+        }
+
+        /// <summary>
+        /// Handles the main form form closing.
+        /// </summary>
+        /// <param name="sender">Sender object.</param>
+        /// <param name="e">Event arguments.</param>
+        private void OnMainFormFormClosing(object sender, FormClosingEventArgs e)
+        {
+            // Set always on top
+            this.SettingsData.AlwaysOnTop = this.alwaysOnTopToolStripMenuItem.Checked;
+
+            // Save settings to disk
+            this.SaveSettingsFile(this.settingsDataPath, this.SettingsData);
+        }
 
         /// <summary>
         /// Handles the exit tool strip menu item click.

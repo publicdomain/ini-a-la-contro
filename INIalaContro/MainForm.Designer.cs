@@ -36,6 +36,11 @@ namespace INIalaContro
         	this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         	this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
         	this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+        	this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+        	this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+        	this.configureLNKParserToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+        	this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+        	this.alwaysOnTopToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         	this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         	this.freeReleasesPublicDomainisToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         	this.originalThreadDonationCodercomToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -51,11 +56,6 @@ namespace INIalaContro
         	this.saveButton = new System.Windows.Forms.Button();
         	this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
         	this.folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
-        	this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-        	this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-        	this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-        	this.alwaysOnTopToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-        	this.configureLNKParserToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         	this.mainMenuStrip.SuspendLayout();
         	this.mainStatusStrip.SuspendLayout();
         	this.mainTableLayoutPanel.SuspendLayout();
@@ -84,13 +84,52 @@ namespace INIalaContro
         	// toolStripSeparator
         	// 
         	this.toolStripSeparator.Name = "toolStripSeparator";
-        	this.toolStripSeparator.Size = new System.Drawing.Size(149, 6);
+        	this.toolStripSeparator.Size = new System.Drawing.Size(89, 6);
         	// 
         	// exitToolStripMenuItem
         	// 
         	this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-        	this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+        	this.exitToolStripMenuItem.Size = new System.Drawing.Size(92, 22);
         	this.exitToolStripMenuItem.Text = "E&xit";
+        	// 
+        	// toolsToolStripMenuItem
+        	// 
+        	this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+        	        	        	this.settingsToolStripMenuItem,
+        	        	        	this.optionsToolStripMenuItem});
+        	this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
+        	this.toolsToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
+        	this.toolsToolStripMenuItem.Text = "&Tools";
+        	// 
+        	// settingsToolStripMenuItem
+        	// 
+        	this.settingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+        	        	        	this.configureLNKParserToolStripMenuItem});
+        	this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
+        	this.settingsToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+        	this.settingsToolStripMenuItem.Text = "&Settings";
+        	// 
+        	// configureLNKParserToolStripMenuItem
+        	// 
+        	this.configureLNKParserToolStripMenuItem.Name = "configureLNKParserToolStripMenuItem";
+        	this.configureLNKParserToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
+        	this.configureLNKParserToolStripMenuItem.Text = "&Configure LNK  parser";
+        	this.configureLNKParserToolStripMenuItem.Click += new System.EventHandler(this.OnConfigureLNKParserToolStripMenuItemClick);
+        	// 
+        	// optionsToolStripMenuItem
+        	// 
+        	this.optionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+        	        	        	this.alwaysOnTopToolStripMenuItem});
+        	this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
+        	this.optionsToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+        	this.optionsToolStripMenuItem.Text = "&Options";
+        	this.optionsToolStripMenuItem.DropDownItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.OnOptionsToolStripMenuItemDropDownItemClicked);
+        	// 
+        	// alwaysOnTopToolStripMenuItem
+        	// 
+        	this.alwaysOnTopToolStripMenuItem.Name = "alwaysOnTopToolStripMenuItem";
+        	this.alwaysOnTopToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
+        	this.alwaysOnTopToolStripMenuItem.Text = "&Always on top";
         	// 
         	// helpToolStripMenuItem
         	// 
@@ -227,45 +266,6 @@ namespace INIalaContro
         	this.saveFileDialog.FileName = "launcher.ini";
         	this.saveFileDialog.Filter = "INI Files|*.ini|All files (*.*)|*.*";
         	// 
-        	// toolsToolStripMenuItem
-        	// 
-        	this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-        	        	        	this.settingsToolStripMenuItem,
-        	        	        	this.optionsToolStripMenuItem});
-        	this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
-        	this.toolsToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
-        	this.toolsToolStripMenuItem.Text = "&Tools";
-        	// 
-        	// settingsToolStripMenuItem
-        	// 
-        	this.settingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-        	        	        	this.configureLNKParserToolStripMenuItem});
-        	this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-        	this.settingsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-        	this.settingsToolStripMenuItem.Text = "&Settings";
-        	// 
-        	// optionsToolStripMenuItem
-        	// 
-        	this.optionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-        	        	        	this.alwaysOnTopToolStripMenuItem});
-        	this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-        	this.optionsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-        	this.optionsToolStripMenuItem.Text = "&Options";
-        	this.optionsToolStripMenuItem.DropDownItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.OnOptionsToolStripMenuItemDropDownItemClicked);
-        	// 
-        	// alwaysOnTopToolStripMenuItem
-        	// 
-        	this.alwaysOnTopToolStripMenuItem.Name = "alwaysOnTopToolStripMenuItem";
-        	this.alwaysOnTopToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-        	this.alwaysOnTopToolStripMenuItem.Text = "&Always on top";
-        	// 
-        	// configureLNKParserToolStripMenuItem
-        	// 
-        	this.configureLNKParserToolStripMenuItem.Name = "configureLNKParserToolStripMenuItem";
-        	this.configureLNKParserToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
-        	this.configureLNKParserToolStripMenuItem.Text = "&Configure LNK  parser";
-        	this.configureLNKParserToolStripMenuItem.Click += new System.EventHandler(this.OnConfigureLNKParserToolStripMenuItemClick);
-        	// 
         	// MainForm
         	// 
         	this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -278,6 +278,8 @@ namespace INIalaContro
         	this.Name = "MainForm";
         	this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
         	this.Text = "INI a la Contro";
+        	this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.OnMainFormFormClosing);
+        	this.Load += new System.EventHandler(this.OnMainFormLoad);
         	this.mainMenuStrip.ResumeLayout(false);
         	this.mainMenuStrip.PerformLayout();
         	this.mainStatusStrip.ResumeLayout(false);
