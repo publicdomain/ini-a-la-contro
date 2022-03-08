@@ -12,9 +12,9 @@ namespace INIalaContro
     using System.Drawing;
     using System.IO;
     using System.Reflection;
+    using System.Text.RegularExpressions;
     using System.Windows.Forms;
     using System.Xml.Serialization;
-    using Blez;
     using PublicDomain;
 
     /// <summary>
@@ -202,6 +202,56 @@ namespace INIalaContro
         }
 
         /// <summary>
+        /// Gets the shortcut target.
+        /// </summary>
+        /// <returns>The shortcut target.</returns>
+        /// <param name="file">File.</param>
+        private string GetShortcutTarget(string file)
+        {
+            string target = string.Empty;
+
+            try
+            {
+                if (Path.GetExtension(file).ToLower() != ".lnk")
+                {
+                    throw new Exception("Must be a .LNK file");
+                }
+
+                ProcessStartInfo startInfo = new ProcessStartInfo()
+                {
+                    FileName = this.SettingsData.ExecutablePath,
+                    Arguments = this.SettingsData.Arguments.Replace("%1", file),
+                    RedirectStandardOutput = true,
+                    RedirectStandardError = true,
+                    UseShellExecute = false,
+                    CreateNoWindow = true
+                };
+
+                Process process = new Process()
+                {
+                    StartInfo = startInfo
+                };
+
+                process.Start();
+
+                process.WaitForExit();
+
+                var input = process.StandardOutput.ReadToEnd();
+
+                // Set shortcut target
+                var matches = Regex.Matches(input, this.SettingsData.Regex);
+
+                target = matches[0].Groups[this.SettingsData.Group].Value;
+            }
+            catch (Exception ex)
+            {
+                return string.Empty;
+            }
+
+            return target;
+        }
+
+        /// <summary>
         /// Processes the directory.
         /// </summary>
         /// <param name="directoryPath">Directory path.</param>
@@ -237,7 +287,7 @@ namespace INIalaContro
                         try
                         {
                             itemList.Add(Path.GetFileNameWithoutExtension(item));
-                            pathList.Add(ShortcutTarget.GetShortcutTarget(item));
+                            pathList.Add(this.GetShortcutTarget(item));
                         }
                         catch (Exception ex)
                         {
