@@ -162,7 +162,7 @@ namespace INIalaContro
             var aboutForm = new AboutForm(
                 $"About {programTitle}",
                 $"{programTitle} {version.Major}.{version.Minor}.{version.Build}",
-                $"Made for: Contro{Environment.NewLine}DonationCoder.com{Environment.NewLine}Day #38, Week #06 @ February 07, 2022",
+                $"Made for: Contro{Environment.NewLine}DonationCoder.com{Environment.NewLine}Day #67, Week #10 @ March 08, 2022",
                 licenseText,
                 this.Icon.ToBitmap())
             {
