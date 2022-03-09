@@ -72,6 +72,20 @@ namespace INIalaContro
             // Group
             ((MainForm)this.Owner).SettingsData.Group = (int)this.groupNumericUpDown.Value;
         }
+
+        /// <summary>
+        /// Handles the configure lnk parser form load.
+        /// </summary>
+        /// <param name="sender">Sender object.</param>
+        /// <param name="e">Event arguments.</param>
+        private void OnConfigureLnkParserFormLoad(object sender, EventArgs e)
+        {
+            // Set GUI by settings data
+            this.openFileDialog.FileName = ((MainForm)this.Owner).SettingsData.ExecutablePath;
+            this.argumentsTextBox.Text = ((MainForm)this.Owner).SettingsData.Arguments;
+            this.regexTextBox.Text = ((MainForm)this.Owner).SettingsData.Regex;
+            this.groupNumericUpDown.Value = ((MainForm)this.Owner).SettingsData.Group;
+        }
     }
 }
 

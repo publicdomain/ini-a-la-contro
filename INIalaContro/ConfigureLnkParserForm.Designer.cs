@@ -212,6 +212,7 @@ namespace INIalaContro
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "Configure LNK Parser";
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.OnConfigureLnkParserFormFormClosing);
+			this.Load += new System.EventHandler(this.OnConfigureLnkParserFormLoad);
 			this.lnkTableLayoutPanel.ResumeLayout(false);
 			this.lnkTableLayoutPanel.PerformLayout();
 			this.okButtonTableLayoutPanel.ResumeLayout(false);

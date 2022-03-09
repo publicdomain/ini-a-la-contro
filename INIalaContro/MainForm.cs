@@ -184,6 +184,16 @@ namespace INIalaContro
         /// <param name="e">Event arguments.</param>
         private void OnBrowseButtonClick(object sender, EventArgs e)
         {
+            // Ensure LNK parser is configured            
+            if (this.SettingsData.ExecutablePath.Length == 0 || this.SettingsData.Arguments.Length == 0 || this.SettingsData.Regex.Length == 0 || this.SettingsData.Group < 1)
+            {
+                // Advise user
+                MessageBox.Show("Please configure LNK parser in full.", "Missing configuration", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                // Halt flow
+                return;
+            }
+
             // Reset selected path
             this.folderBrowserDialog.SelectedPath = string.Empty;
 
