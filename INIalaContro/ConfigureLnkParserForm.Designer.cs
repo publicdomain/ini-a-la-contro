@@ -30,20 +30,16 @@ namespace INIalaContro
 		private void InitializeComponent()
 		{
 			this.lnkTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
+			this.scriptPathButton = new System.Windows.Forms.Button();
 			this.executableLabel = new System.Windows.Forms.Label();
-			this.argumentsLabel = new System.Windows.Forms.Label();
-			this.regexLabel = new System.Windows.Forms.Label();
-			this.groupLabel = new System.Windows.Forms.Label();
-			this.regexTextBox = new System.Windows.Forms.TextBox();
-			this.argumentsTextBox = new System.Windows.Forms.TextBox();
+			this.scriptFileLabel = new System.Windows.Forms.Label();
 			this.executablePathButton = new System.Windows.Forms.Button();
 			this.okButtonTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
 			this.okButton = new System.Windows.Forms.Button();
-			this.groupNumericUpDown = new System.Windows.Forms.NumericUpDown();
-			this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
+			this.executableOpenFileDialog = new System.Windows.Forms.OpenFileDialog();
+			this.scriptOpenFileDialog = new System.Windows.Forms.OpenFileDialog();
 			this.lnkTableLayoutPanel.SuspendLayout();
 			this.okButtonTableLayoutPanel.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.groupNumericUpDown)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// lnkTableLayoutPanel
@@ -51,26 +47,32 @@ namespace INIalaContro
 			this.lnkTableLayoutPanel.ColumnCount = 2;
 			this.lnkTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
 			this.lnkTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 60F));
+			this.lnkTableLayoutPanel.Controls.Add(this.scriptPathButton, 1, 1);
 			this.lnkTableLayoutPanel.Controls.Add(this.executableLabel, 0, 0);
-			this.lnkTableLayoutPanel.Controls.Add(this.argumentsLabel, 0, 1);
-			this.lnkTableLayoutPanel.Controls.Add(this.regexLabel, 0, 2);
-			this.lnkTableLayoutPanel.Controls.Add(this.groupLabel, 0, 3);
-			this.lnkTableLayoutPanel.Controls.Add(this.regexTextBox, 1, 2);
-			this.lnkTableLayoutPanel.Controls.Add(this.argumentsTextBox, 1, 1);
+			this.lnkTableLayoutPanel.Controls.Add(this.scriptFileLabel, 0, 1);
 			this.lnkTableLayoutPanel.Controls.Add(this.executablePathButton, 1, 0);
-			this.lnkTableLayoutPanel.Controls.Add(this.okButtonTableLayoutPanel, 0, 4);
-			this.lnkTableLayoutPanel.Controls.Add(this.groupNumericUpDown, 1, 3);
+			this.lnkTableLayoutPanel.Controls.Add(this.okButtonTableLayoutPanel, 0, 2);
 			this.lnkTableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.lnkTableLayoutPanel.Location = new System.Drawing.Point(0, 0);
 			this.lnkTableLayoutPanel.Name = "lnkTableLayoutPanel";
-			this.lnkTableLayoutPanel.RowCount = 5;
-			this.lnkTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-			this.lnkTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+			this.lnkTableLayoutPanel.RowCount = 3;
 			this.lnkTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
 			this.lnkTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
 			this.lnkTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-			this.lnkTableLayoutPanel.Size = new System.Drawing.Size(288, 159);
+			this.lnkTableLayoutPanel.Size = new System.Drawing.Size(288, 106);
 			this.lnkTableLayoutPanel.TabIndex = 0;
+			// 
+			// scriptPathButton
+			// 
+			this.scriptPathButton.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.scriptPathButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.scriptPathButton.Location = new System.Drawing.Point(118, 41);
+			this.scriptPathButton.Name = "scriptPathButton";
+			this.scriptPathButton.Size = new System.Drawing.Size(167, 32);
+			this.scriptPathButton.TabIndex = 5;
+			this.scriptPathButton.Text = "Browse for &script";
+			this.scriptPathButton.UseVisualStyleBackColor = true;
+			this.scriptPathButton.Click += new System.EventHandler(this.OnScriptPathButtonClick);
 			// 
 			// executableLabel
 			// 
@@ -78,61 +80,21 @@ namespace INIalaContro
 			this.executableLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.executableLabel.Location = new System.Drawing.Point(3, 0);
 			this.executableLabel.Name = "executableLabel";
-			this.executableLabel.Size = new System.Drawing.Size(109, 32);
+			this.executableLabel.Size = new System.Drawing.Size(109, 38);
 			this.executableLabel.TabIndex = 0;
 			this.executableLabel.Text = "&Executable:";
 			this.executableLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			// 
-			// argumentsLabel
+			// scriptFileLabel
 			// 
-			this.argumentsLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.argumentsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.argumentsLabel.Location = new System.Drawing.Point(3, 32);
-			this.argumentsLabel.Name = "argumentsLabel";
-			this.argumentsLabel.Size = new System.Drawing.Size(109, 32);
-			this.argumentsLabel.TabIndex = 1;
-			this.argumentsLabel.Text = "&Arguments:";
-			this.argumentsLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-			// 
-			// regexLabel
-			// 
-			this.regexLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.regexLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.regexLabel.Location = new System.Drawing.Point(3, 64);
-			this.regexLabel.Name = "regexLabel";
-			this.regexLabel.Size = new System.Drawing.Size(109, 32);
-			this.regexLabel.TabIndex = 2;
-			this.regexLabel.Text = "&Regex:";
-			this.regexLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-			// 
-			// groupLabel
-			// 
-			this.groupLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.groupLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.groupLabel.Location = new System.Drawing.Point(3, 96);
-			this.groupLabel.Name = "groupLabel";
-			this.groupLabel.Size = new System.Drawing.Size(109, 32);
-			this.groupLabel.TabIndex = 3;
-			this.groupLabel.Text = "Group:";
-			this.groupLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-			// 
-			// regexTextBox
-			// 
-			this.regexTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.regexTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.regexTextBox.Location = new System.Drawing.Point(118, 67);
-			this.regexTextBox.Name = "regexTextBox";
-			this.regexTextBox.Size = new System.Drawing.Size(167, 26);
-			this.regexTextBox.TabIndex = 2;
-			// 
-			// argumentsTextBox
-			// 
-			this.argumentsTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.argumentsTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.argumentsTextBox.Location = new System.Drawing.Point(118, 35);
-			this.argumentsTextBox.Name = "argumentsTextBox";
-			this.argumentsTextBox.Size = new System.Drawing.Size(167, 26);
-			this.argumentsTextBox.TabIndex = 1;
+			this.scriptFileLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.scriptFileLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.scriptFileLabel.Location = new System.Drawing.Point(3, 38);
+			this.scriptFileLabel.Name = "scriptFileLabel";
+			this.scriptFileLabel.Size = new System.Drawing.Size(109, 38);
+			this.scriptFileLabel.TabIndex = 1;
+			this.scriptFileLabel.Text = "&Script file:";
+			this.scriptFileLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			// 
 			// executablePathButton
 			// 
@@ -140,7 +102,7 @@ namespace INIalaContro
 			this.executablePathButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.executablePathButton.Location = new System.Drawing.Point(118, 3);
 			this.executablePathButton.Name = "executablePathButton";
-			this.executablePathButton.Size = new System.Drawing.Size(167, 26);
+			this.executablePathButton.Size = new System.Drawing.Size(167, 32);
 			this.executablePathButton.TabIndex = 0;
 			this.executablePathButton.Text = "&Browse for .exe";
 			this.executablePathButton.UseVisualStyleBackColor = true;
@@ -155,13 +117,13 @@ namespace INIalaContro
 			this.okButtonTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
 			this.okButtonTableLayoutPanel.Controls.Add(this.okButton, 1, 0);
 			this.okButtonTableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.okButtonTableLayoutPanel.Location = new System.Drawing.Point(0, 128);
+			this.okButtonTableLayoutPanel.Location = new System.Drawing.Point(0, 76);
 			this.okButtonTableLayoutPanel.Margin = new System.Windows.Forms.Padding(0);
 			this.okButtonTableLayoutPanel.Name = "okButtonTableLayoutPanel";
 			this.okButtonTableLayoutPanel.RowCount = 1;
 			this.okButtonTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-			this.okButtonTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 31F));
-			this.okButtonTableLayoutPanel.Size = new System.Drawing.Size(288, 31);
+			this.okButtonTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+			this.okButtonTableLayoutPanel.Size = new System.Drawing.Size(288, 30);
 			this.okButtonTableLayoutPanel.TabIndex = 4;
 			// 
 			// okButton
@@ -171,42 +133,28 @@ namespace INIalaContro
 			this.okButton.Location = new System.Drawing.Point(73, 1);
 			this.okButton.Margin = new System.Windows.Forms.Padding(1);
 			this.okButton.Name = "okButton";
-			this.okButton.Size = new System.Drawing.Size(142, 29);
+			this.okButton.Size = new System.Drawing.Size(142, 28);
 			this.okButton.TabIndex = 4;
 			this.okButton.Text = "&OK";
 			this.okButton.UseVisualStyleBackColor = true;
 			this.okButton.Click += new System.EventHandler(this.OnOkButtonClick);
 			// 
-			// groupNumericUpDown
+			// executableOpenFileDialog
 			// 
-			this.groupNumericUpDown.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.groupNumericUpDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-			this.groupNumericUpDown.Location = new System.Drawing.Point(118, 99);
-			this.groupNumericUpDown.Minimum = new decimal(new int[] {
-									1,
-									0,
-									0,
-									0});
-			this.groupNumericUpDown.Name = "groupNumericUpDown";
-			this.groupNumericUpDown.Size = new System.Drawing.Size(167, 26);
-			this.groupNumericUpDown.TabIndex = 3;
-			this.groupNumericUpDown.Value = new decimal(new int[] {
-									1,
-									0,
-									0,
-									0});
+			this.executableOpenFileDialog.Filter = "Exe Files (.exe)|*.exe|All Files (*.*)|*.*";
+			this.executableOpenFileDialog.Title = "Executable path";
 			// 
-			// openFileDialog
+			// scriptOpenFileDialog
 			// 
-			this.openFileDialog.Filter = "Exe Files (.exe)|*.exe|All Files (*.*)|*.*";
-			this.openFileDialog.Title = "LNK parser path";
+			this.scriptOpenFileDialog.Filter = "All Files (*.*)|*.*";
+			this.scriptOpenFileDialog.Title = "Script path";
 			// 
 			// ConfigureLnkParserForm
 			// 
 			this.AcceptButton = this.okButton;
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(288, 159);
+			this.ClientSize = new System.Drawing.Size(288, 106);
 			this.Controls.Add(this.lnkTableLayoutPanel);
 			this.Name = "ConfigureLnkParserForm";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -214,21 +162,16 @@ namespace INIalaContro
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.OnConfigureLnkParserFormFormClosing);
 			this.Load += new System.EventHandler(this.OnConfigureLnkParserFormLoad);
 			this.lnkTableLayoutPanel.ResumeLayout(false);
-			this.lnkTableLayoutPanel.PerformLayout();
 			this.okButtonTableLayoutPanel.ResumeLayout(false);
-			((System.ComponentModel.ISupportInitialize)(this.groupNumericUpDown)).EndInit();
 			this.ResumeLayout(false);
 		}
-		private System.Windows.Forms.OpenFileDialog openFileDialog;
-		private System.Windows.Forms.NumericUpDown groupNumericUpDown;
+		private System.Windows.Forms.OpenFileDialog scriptOpenFileDialog;
+		private System.Windows.Forms.Button scriptPathButton;
+		private System.Windows.Forms.OpenFileDialog executableOpenFileDialog;
 		private System.Windows.Forms.Button okButton;
 		private System.Windows.Forms.TableLayoutPanel okButtonTableLayoutPanel;
 		private System.Windows.Forms.Button executablePathButton;
-		private System.Windows.Forms.TextBox argumentsTextBox;
-		private System.Windows.Forms.TextBox regexTextBox;
-		private System.Windows.Forms.Label groupLabel;
-		private System.Windows.Forms.Label regexLabel;
-		private System.Windows.Forms.Label argumentsLabel;
+		private System.Windows.Forms.Label scriptFileLabel;
 		private System.Windows.Forms.Label executableLabel;
 		private System.Windows.Forms.TableLayoutPanel lnkTableLayoutPanel;
 	}

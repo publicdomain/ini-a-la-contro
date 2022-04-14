@@ -26,11 +26,19 @@ namespace INIalaContro
         /// <param name="e">Event arguments.</param>
         private void OnExecutablePathButtonClick(object sender, EventArgs e)
         {
-            // Clear file name
-            this.openFileDialog.FileName = string.Empty;
-
             // Show open file dialog
-            this.openFileDialog.ShowDialog();
+            this.executableOpenFileDialog.ShowDialog();
+        }
+
+        /// <summary>
+        /// Handles the script path button click.
+        /// </summary>
+        /// <param name="sender">Sender object.</param>
+        /// <param name="e">Event arguments.</param>
+        private void OnScriptPathButtonClick(object sender, EventArgs e)
+        {
+            // Show open file dialog
+            this.scriptOpenFileDialog.ShowDialog();
         }
 
         /// <summary>
@@ -52,25 +60,10 @@ namespace INIalaContro
         private void OnConfigureLnkParserFormFormClosing(object sender, FormClosingEventArgs e)
         {
             // Executable path
-            if (this.openFileDialog.FileName.Length > 0)
-            {
-                ((MainForm)this.Owner).SettingsData.ExecutablePath = this.openFileDialog.FileName;
-            }
+            ((MainForm)this.Owner).SettingsData.ExecutablePath = this.executableOpenFileDialog.FileName.Length > 0 ? this.executableOpenFileDialog.FileName : string.Empty;
 
-            // Arguments
-            if (this.argumentsTextBox.Text.Length > 0)
-            {
-                ((MainForm)this.Owner).SettingsData.Arguments = this.argumentsTextBox.Text;
-            }
-
-            // Regex
-            if (this.regexTextBox.Text.Length > 0)
-            {
-                ((MainForm)this.Owner).SettingsData.Regex = this.regexTextBox.Text;
-            }
-
-            // Group
-            ((MainForm)this.Owner).SettingsData.Group = (int)this.groupNumericUpDown.Value;
+            // Script ṕath
+            ((MainForm)this.Owner).SettingsData.ScriptPath = this.scriptOpenFileDialog.FileName.Length > 0 ? this.scriptOpenFileDialog.FileName : string.Empty;
         }
 
         /// <summary>
@@ -81,10 +74,8 @@ namespace INIalaContro
         private void OnConfigureLnkParserFormLoad(object sender, EventArgs e)
         {
             // Set GUI by settings data
-            this.openFileDialog.FileName = ((MainForm)this.Owner).SettingsData.ExecutablePath;
-            this.argumentsTextBox.Text = ((MainForm)this.Owner).SettingsData.Arguments;
-            this.regexTextBox.Text = ((MainForm)this.Owner).SettingsData.Regex;
-            this.groupNumericUpDown.Value = ((MainForm)this.Owner).SettingsData.Group;
+            this.executableOpenFileDialog.FileName = ((MainForm)this.Owner).SettingsData.ExecutablePath;
+            this.scriptOpenFileDialog.FileName = ((MainForm)this.Owner).SettingsData.ScriptPath;
         }
     }
 }

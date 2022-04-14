@@ -185,10 +185,10 @@ namespace INIalaContro
         private void OnBrowseButtonClick(object sender, EventArgs e)
         {
             // Ensure LNK parser is configured            
-            if (this.SettingsData.ExecutablePath.Length == 0 || this.SettingsData.Arguments.Length == 0 || this.SettingsData.Regex.Length == 0 || this.SettingsData.Group < 1)
+            if (this.SettingsData.ExecutablePath.Length == 0)
             {
                 // Advise user
-                MessageBox.Show("Please configure LNK parser in full.", "Missing configuration", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Please configure LNK parser.", "Missing configuration", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                 // Halt flow
                 return;
@@ -230,7 +230,7 @@ namespace INIalaContro
                 ProcessStartInfo startInfo = new ProcessStartInfo()
                 {
                     FileName = this.SettingsData.ExecutablePath,
-                    Arguments = this.SettingsData.Arguments.Replace("%1", file),
+                    Arguments = this.SettingsData.ScriptPath,
                     RedirectStandardOutput = true,
                     RedirectStandardError = true,
                     UseShellExecute = false,
@@ -246,12 +246,8 @@ namespace INIalaContro
 
                 process.WaitForExit();
 
-                var input = process.StandardOutput.ReadToEnd();
-
                 // Set shortcut target
-                var matches = Regex.Matches(input, this.SettingsData.Regex);
-
-                target = matches[0].Groups[this.SettingsData.Group].Value;
+                target = process.StandardOutput.ReadToEnd();
             }
             catch (Exception ex)
             {
@@ -369,7 +365,7 @@ namespace INIalaContro
             if (this.iniContents.Length == 0)
             {
                 // Advise user
-                MessageBox.Show("Please set target directory.", "Missng folder", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("Please set target directory.", "Missing folder", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
             else
             {
@@ -378,7 +374,7 @@ namespace INIalaContro
                 Clipboard.SetText(this.iniContents);
 
                 // Advise user
-                MessageBox.Show("Ini file contents have been copied..", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Ini file contents have been copied.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 

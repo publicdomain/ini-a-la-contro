@@ -35,21 +35,9 @@ namespace PublicDomain
         public string ExecutablePath { get; set; } = string.Empty;
 
         /// <summary>
-        /// Gets or sets the arguments.
+        /// Gets or sets the script path.
         /// </summary>
-        /// <value>The arguments.</value>
-        public string Arguments { get; set; } = string.Empty;
-
-        /// <summary>
-        /// Gets or sets the regex.
-        /// </summary>
-        /// <value>The regex.</value>
-        public string Regex { get; set; } = string.Empty;
-
-        /// <summary>
-        /// Gets or sets the group.
-        /// </summary>
-        /// <value>The group.</value>
-        public int Group { get; set; } = 1;
+        /// <value>The script path.</value>
+        public string ScriptPath { get; set; } = string.Empty;
     }
 }
