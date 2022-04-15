@@ -84,13 +84,14 @@ namespace INIalaContro
         	// toolStripSeparator
         	// 
         	this.toolStripSeparator.Name = "toolStripSeparator";
-        	this.toolStripSeparator.Size = new System.Drawing.Size(89, 6);
+        	this.toolStripSeparator.Size = new System.Drawing.Size(149, 6);
         	// 
         	// exitToolStripMenuItem
         	// 
         	this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-        	this.exitToolStripMenuItem.Size = new System.Drawing.Size(92, 22);
+        	this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
         	this.exitToolStripMenuItem.Text = "E&xit";
+        	this.exitToolStripMenuItem.Click += new System.EventHandler(this.OnExitToolStripMenuItemClick);
         	// 
         	// toolsToolStripMenuItem
         	// 

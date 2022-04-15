@@ -12,6 +12,7 @@ namespace INIalaContro
     using System.Drawing;
     using System.IO;
     using System.Reflection;
+    using System.Text;
     using System.Text.RegularExpressions;
     using System.Windows.Forms;
     using System.Xml.Serialization;
@@ -162,7 +163,7 @@ namespace INIalaContro
             var aboutForm = new AboutForm(
                 $"About {programTitle}",
                 $"{programTitle} {version.Major}.{version.Minor}.{version.Build}",
-                $"Made for: Contro{Environment.NewLine}DonationCoder.com{Environment.NewLine}Day #67, Week #10 @ March 08, 2022",
+                $"Made for: Contro{Environment.NewLine}DonationCoder.com{Environment.NewLine}Day #105, Week #15 @ April 15, 2022",
                 licenseText,
                 this.Icon.ToBitmap())
             {
@@ -227,10 +228,11 @@ namespace INIalaContro
                     throw new Exception("Must be a .LNK file");
                 }
 
+                // Set start info
                 ProcessStartInfo startInfo = new ProcessStartInfo()
                 {
                     FileName = this.SettingsData.ExecutablePath,
-                    Arguments = this.SettingsData.ScriptPath,
+                    Arguments = this.SettingsData.ScriptPath.Length > 0 ? $"\"{this.SettingsData.ScriptPath}\" \"{file}\"" : $"\"{file}\"",
                     RedirectStandardOutput = true,
                     RedirectStandardError = true,
                     UseShellExecute = false,
